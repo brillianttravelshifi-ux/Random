@@ -1,0 +1,247 @@
+# =========================================
+# 🟢 1. LIST (Ordered, Mutable, Allows Duplicates)
+# =========================================
+
+print("\n🟢 LIST SECTION")
+
+lst = [3, 1, 2, 2, 5]
+print("Original:", lst)
+
+# ➤ Adding elements
+lst.append(10)              # adds at end
+lst.insert(1, 99)           # insert at index
+print("After append & insert:", lst)
+
+# ➤ Removing elements
+lst.remove(2)               # removes FIRST occurrence only
+popped = lst.pop()          # removes last element
+print("Removed last:", popped)
+print("After remove & pop:", lst)
+
+# ➤ Sorting
+lst.sort()                  # modifies original
+print("Sorted:", lst)
+
+# ➤ Reverse
+lst.reverse()
+print("Reversed:", lst)
+
+# 💥 TRICK: remove only removes FIRST match
+print([1,2,2,2].remove(2))   # prints None (method returns nothing)
+
+# 💥 TRICK: copying
+lst_copy = lst.copy()
+print("Copy:", lst_copy)
+
+
+# =========================================
+# 🔵 2. TUPLE (Ordered, Immutable)
+# =========================================
+
+print("\n🔵 TUPLE SECTION")
+
+t = (1, 2, 3)
+print("Tuple:", t)
+
+# ➤ Unpacking
+a, b, c = t
+print("Unpacked:", a, b, c)
+
+# 💥 TRICK: single element tuple
+t_single = (5,)    # comma is IMPORTANT
+print("Single tuple:", t_single)
+
+# 💥 TRICK: without comma → not tuple
+print(type((5)))   # int
+
+# ➤ Nested tuple with mutable object
+t2 = (1, [2, 3])
+t2[1].append(99)   # allowed!
+print("Modified inside tuple:", t2)
+
+
+# =========================================
+# 🟡 3. SET (Unordered, Unique Elements)
+# =========================================
+
+print("\n🟡 SET SECTION")
+
+s = {1, 2, 2, 3}
+print("Duplicates removed:", s)
+
+# ➤ Adding
+s.add(10)
+s.update([20, 30])   # multiple values
+print("After add/update:", s)
+
+# ➤ Removing
+s.discard(999)       # no error
+# s.remove(999)      # would give error
+print("Safe discard:", s)
+
+# ➤ Pop (random removal)
+print("Random pop:", s.pop())
+
+# ➤ Set operations
+A = {1, 2, 3}
+B = {3, 4, 5}
+
+print("Union:", A | B)
+print("Intersection:", A & B)
+print("Difference:", A - B)
+
+# 💥 TRICK: set from string
+print("Set from string:", set("hello"))
+
+# 💥 TRICK: cannot store list
+# s = {[1,2]} ❌ ERROR
+
+
+# =========================================
+# 🔴 4. DICTIONARY (Key-Value, Mutable)
+# =========================================
+
+print("\n🔴 DICTIONARY SECTION")
+
+d = {"a": 1, "b": 2}
+print("Original:", d)
+
+# ➤ Add / update
+d["c"] = 3
+d.update({"b": 20})
+print("After update:", d)
+
+# ➤ Access safely
+print("get():", d.get("a"))
+print("missing key:", d.get("z"))  # None
+
+# ➤ Remove
+removed = d.pop("a")
+print("Removed:", removed)
+
+# ➤ popitem (last inserted)
+print("Popitem:", d.popitem())
+
+# ➤ setdefault
+d.setdefault("x", 100)
+d.setdefault("x", 999)   # won't overwrite
+print("setdefault:", d)
+
+# ➤ Loop
+for k, v in d.items():
+    print("Key:", k, "Value:", v)
+
+# 💥 TRICK: keys must be immutable
+d[(1,2)] = "tuple key"
+
+# 💥 TRICK: duplicate keys overwrite
+d2 = {"a":1, "a":5}
+print("Duplicate key:", d2)
+
+# 💥 TRICK: True == 1
+d3 = {True:"yes", 1:"no"}
+print("True vs 1:", d3)
+
+
+# =========================================
+# 🟣 5. COMPREHENSIONS (ADVANCED)
+# =========================================
+
+print("\n🟣 COMPREHENSIONS")
+
+# ➤ List comprehension
+lc = [x*x for x in range(5)]
+print("List comp:", lc)
+
+# ➤ Set comprehension
+sc = {x % 2 for x in range(5)}
+print("Set comp:", sc)
+
+# ➤ Dict comprehension
+dc = {x: x*x for x in range(5)}
+print("Dict comp:", dc)
+
+# 💥 TRICK: duplicates collapse in set
+print({x//2 for x in range(6)})  # {0,1,2}
+
+
+# =========================================
+# 🔥 6. MIXED USAGE (VERY IMPORTANT)
+# =========================================
+
+print("\n🔥 MIXED USAGE")
+
+data = [("a",1), ("b",2), ("a",3)]
+
+# ➤ List → dict (last value wins)
+d_mix = dict(data)
+print("List to dict:", d_mix)
+
+# ➤ Unique values using set
+unique_vals = {v for k,v in data}
+print("Unique values:", unique_vals)
+
+# ➤ Dict keys → tuple
+keys_tuple = tuple(d_mix.keys())
+print("Keys tuple:", keys_tuple)
+
+
+# =========================================
+# ⚡ 7. ADVANCED TRICKS (EXAM FAVORITES)
+# =========================================
+
+print("\n⚡ ADVANCED TRICKS")
+
+# 1. 1 and 1.0 same key
+print({1:"a", 1.0:"b"})
+
+# 2. membership
+print("a" in {"a":1})   # True
+print(1 in {"a":1})     # False
+
+# 3. unpacking
+a, b = [10, 20]
+print("Unpacked list:", a, b)
+
+# 4. extended unpacking
+a, *b = [1,2,3,4]
+print("Extended unpack:", a, b)
+
+# 5. zip trick
+keys = ["x","y"]
+vals = [100,200]
+print("Zip dict:", dict(zip(keys, vals)))
+
+
+# =========================================
+# 🎯 8. MISCELLANEOUS (HIDDEN GOLD)
+# =========================================
+
+print("\n🎯 MISCELLANEOUS")
+
+# ➤ Swapping variables (tuple magic)
+x, y = 5, 10
+x, y = y, x
+print("Swapped:", x, y)
+
+# ➤ Counting using dict
+text = "banana"
+freq = {}
+for ch in text:
+    freq[ch] = freq.get(ch, 0) + 1
+print("Frequency:", freq)
+
+# ➤ Removing duplicates from list
+lst_dup = [1,2,2,3,3]
+lst_unique = list(set(lst_dup))
+print("Unique list:", lst_unique)
+
+# ➤ Sorting dict by key
+d_sort = {"b":2, "a":1}
+print("Sorted dict:", dict(sorted(d_sort.items())))
+
+# ➤ Max value key
+print("Max key:", max(d_sort, key=d_sort.get))
+
+
+print("\n✅ END OF MEGA PROGRAM")
