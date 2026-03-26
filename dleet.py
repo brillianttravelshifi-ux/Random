@@ -20,7 +20,7 @@ def _entropy(seed):
     return [int(h[i:i+2], 16) for i in range(0, len(h), 2)]
 
 def _noise():
-    chars = string.ascii_letters + string.digits + "\r!@#$%^&*()_+-=[]{}|;:',.<>/?~█▓▒░"
+    chars = string.ascii_letters + string.digits + "\r█▓▒░"
     return "".join(random.choice(chars) for _ in range(random.randint(60, 120)))
 
 def _stream(duration=3.5):
